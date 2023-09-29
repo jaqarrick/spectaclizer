@@ -1,52 +1,103 @@
-var player
-const onPlayerReady = (event) => {
-  player.playVideo();
-};
-var playButton = document.querySelector("#play-btn")
+class Spectaclizer {
+  constructor({
+    videoId,
+    containerId,
+    type }) {
+    const playerId = `player-${videoId}`
+    this.playerId = playerId
+    this.containerId = containerId
+    this.videoId = videoId
+    this.type = type
 
-
-playButton.onclick = () => {
-  document.getElementById('video-overlay').style.display = 'none';
-
-  onYouTubeIframeAPIReady()
-}
-
-const onPlayerStateChange = (event) => {
-  console.log(event);
-  console.log(YT.PlayerState)
-  const { BUFFERING, UNSTARTED } = YT.PlayerState
-  if(event.data === UNSTARTED){
-    console.log('playing video')
-   player.playVideo()
+    this.render()
+    this.initPlayer()
   }
 
-};
-const onYouTubeIframeAPIReady = () => {
-  console.log('ready')
-  player = new YT.Player("player", {
-    videoId: "KbJ7gDML4pA", // Replace with your YouTube video ID.
-    playerVars: {
-      autoplay: 1, // Set to 1 to autoplay the video.
-      controls: 0, // Show video controls.
-      rel: 0, // Don't show related videos after playback.
-      mute: 0,
-      showinfo: 0
-    },
-    events: {
-      onReady: onPlayerReady, // Function to call when the player is ready.
-      onStateChange: onPlayerStateChange, // Function to call when the player's state changes.
-    },
-  });
-};
+  render = () => {
+    const containerElement = document.querySelector(`#${this.containerId}`)
+    if (!containerElement) {
+      throw new Error('Container element not defined.')
+    }
+    this.playerElement = document.createElement('div')
+    this.playerElement.id = this.playerId
+    containerElement.appendChild(this.playerElement)
 
+    if (this.type === 'background') {
+      this.renderAsBackground()
+    } else if (this.type === 'audio') {
+      this.renderAsAudioOnly()
+    } else if (this.type === 'floater'){
+      this.renderAsFloater()
+    }
+  }
 
-  // Add event listeners to prevent cascading mouse events
-  const playerDiv = document.getElementById("player");
+  renderAsBackground = () => {
+    //  todo, create style tag w class declarations
+    this.playerElement.classList.add('background')
+  }
 
-  playerDiv.addEventListener("mouseenter", (event) => {
-    event.preventDefault(); // Prevent default mouseenter behavior
-  });
+  renderAsFloater = () => {
+    this.playerElement.classList.add('floater')
+  }
 
-  playerDiv.addEventListener("mouseleave", (event) => {
-    event.preventDefault(); // Prevent default mouseleave behavior
-  });
+  renderAsAudioOnly = () => {
+    this.playerElement.style.position = 'absolute'
+    this.playerElement.style.opacity = 0
+  }
+
+  initPlayer = () => {
+    this.player = new YT.Player(this.playerId, {
+      videoId: this.videoId,
+      playerVars: {
+        autoplay: 0, // Set to 1 to autoplay the video.
+        controls: 0, // Show video controls.
+        rel: 0, // Don't show related videos after playback.
+        mute: 1,
+        showinfo: 0,
+        loop: 1,
+        disablekb: 1,
+        cc_load_policy: 0
+      },
+      events: {
+        onReady: this.onPlayerReady, // Function to call when the player is ready.
+        // onStateChange: onPlayerStateChange, // Function to call when the player's state changes.
+      },
+    });
+  }
+
+  applyVisualEffects = (element) => {
+
+    if(this.type === 'floater'){
+      element.style.filter = 'hue-rotate(1deg) saturate(300%) contrast(150%) brightness(300%)';
+
+    } else {
+      element.style.filter = 'hue-rotate(1deg) saturate(1%) contrast(150%) brightness(300%)';
+      element.style.transform = 'scale(4, 2)'; // This example scales by a factor of 1.5 in both directions
+    }
+  
+  }
+
+  onPlayerReady = (event) => {
+
+    if (this.type !== 'background') {
+      this.player.unMute()
+    }
+
+    if (this.type === 'background') {
+      this.player.setPlaybackRate(2)
+    }
+
+    if(this.type === 'floater'){
+      this.player.setPlaybackRate(0.5)
+    }
+    this.applyVisualEffects(event.target.g)
+  }
+
+  start = () => {
+    if (!this.player) {
+      throw new Error('Player has not been initialized')
+    }
+    this.player.playVideo()
+  }
+}
+
