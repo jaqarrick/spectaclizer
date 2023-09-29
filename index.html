@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #player {
+      /* Hide the video title and logo */
+      position: relative;
+      padding-top: 0;
+      overflow: hidden;
+    }
+    .ytp-chrome-top {
+      display: none !important; /* Hide the top chrome (including title) */
+    }
+    .ytp-watermark {
+      display: none !important; /* Hide the YouTube logo */
+    }
+  </style>
+</head>
+<body>
+  <div id="player" class="player"></div>
+  <button id="play-btn">play</button>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/player.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
