@@ -1,17 +1,30 @@
-const init = () => {
-  const background = new Spectaclizer({ videoId: "XkfOebBYm-U", containerId: "container", type: 'background' })
-  const audio = new Spectaclizer({videoId: '529wVt6Yg5I', containerId: "container", type: 'audio'})
-  const floater = new Spectaclizer({videoId: 'crPoQKuP4pI', containerId: "container", type: 'floater'})
+const containerId = 'container';
+
+const videos = [
+  { videoId: 'XkfOebBYm-U', type: 'background' },
+  { videoId: '529wVt6Yg5I', type: 'audio' },
+  { videoId: 'crPoQKuP4pI', type: 'floater' },
+  { videoId: 'RIDJitRNpAU', type: 'floater' },
+  { videoId: 'GbG9Ov-0wBQ', type: 'floater' },
+  { videoId: 'JOCRo97NoJ8', type: 'floater' },
+];
+
+const init = async () => {
+  // const videos = await fetchInitialData()
+  const spectacles = videos.map(
+    ({ videoId, type }) =>
+      new Spectaclizer({
+        videoId,
+        type,
+        containerId,
+      }),
+  );
   document.querySelector('#play-btn').onclick = () => {
-    background.start()
-    audio.start()
-    floater.start()
-  }
-  
+    console.log('play');
+    spectacles.forEach((s) => s.start());
+  };
 };
 
-window.onload = () => {
-  init();
+window.onload = async () => {
+  await init();
 };
-
-
