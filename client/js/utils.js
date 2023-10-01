@@ -10,8 +10,16 @@ const getRandomItemsFromArray = (array, count) => {
 
   shuffleArray(shuffledArray);
 
-  // Ensure count does not exceed the length of the array
   count = Math.min(count, shuffledArray.length);
 
   return shuffledArray.slice(0, count);
+};
+const getRandomItemFromArray = (array) => {
+  if (array.length === 0) {
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * array.length);
+
+  return array[randomIndex];
 };

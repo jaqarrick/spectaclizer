@@ -70,7 +70,7 @@ const initWorker = async () => {
     console.log('Clearing Cache');
     clearData();
     console.log('Fetching data');
-    await fetchDataAndUpdateCache();
+    await fetchAndSetAllData()
     console.log('Worker completed');
   });
 };
