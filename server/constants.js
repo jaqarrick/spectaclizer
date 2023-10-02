@@ -23,9 +23,10 @@ const BACKGROUND_KEY = 'background';
 const AUDIO_KEY = 'audio';
 const FLOATERS_KEY = 'floaters';
 
-const BACKGROUND_MAX_RESULTS = 15;
-const AUDIO_MAX_RESULTS = 8;
-const FLOATERS_MAX_RESULTS = 30;
+const BACKGROUND_MAX_RESULTS = 25;
+const AUDIO_MAX_RESULTS = 15;
+const FLOATERS_MAX_RESULTS = 40;
+
 module.exports = {
   floaterSearchTerms,
   audioSearchTerms,
