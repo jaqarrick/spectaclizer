@@ -1,14 +1,10 @@
-const backgroundSearchTerm = 'Police training video';
-const audioSearchTerm = 'Creepy ambient music';
-const floaterSearchTerm = 'The view show latest';
-
 const BACKGROUND_KEY = 'background';
 const AUDIO_KEY = 'audio';
 const FLOATERS_KEY = 'floaters';
 const NUM_OF_FLOATERS = 3;
 
 const makeRequest = async () => {
-  const url = `http://localhost:3000/videos`;
+  const url = `https://ext-tech.online/spectacle`;
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -29,7 +25,6 @@ const fetchInitialData = async () => {
     // We can only have 1 audio / background video
     if (key === BACKGROUND_KEY || key === AUDIO_KEY) {
       const videoId = getRandomItemFromArray(l);
-      console.log(videoId, 'videoId');
       videoList.push({
         videoId,
         type: key,

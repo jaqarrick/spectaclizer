@@ -8,6 +8,10 @@ class Spectaclizer {
 
     this.render();
     this.initPlayer();
+
+     this.playerReadyPromise = new Promise((resolve) => {
+      this.onPlayerReadyResolver = resolve;
+    });
   }
 
   render = () => {
@@ -25,6 +29,7 @@ class Spectaclizer {
     } else if (this.type === 'audio') {
       this.playerElement.style.position = 'absolute';
       this.playerElement.style.opacity = 0;
+      this.playerElement.style.pointerEvents = 'none'
     } else if (this.type === 'floater') {
       const wrapper = document.createElement('div');
       wrapper.classList.add('floater-wrapper');
@@ -97,6 +102,7 @@ class Spectaclizer {
       this.player.setPlaybackRate(0.5);
     }
     this.applyVisualEffects(event.target.g);
+    this.onPlayerReadyResolver()
   };
 
   start = () => {
