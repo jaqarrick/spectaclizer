@@ -63,7 +63,7 @@ const fetchData = async (query, maxResults) => {
 
 const fetchAndSetAllData = async () => {
     await Promise.all([
-        translateDataToVideosMap(BACKGROUND_KEY, [backgroundVideoSearchTerms], BACKGROUND_MAX_RESULTS),
+        translateDataToVideosMap(BACKGROUND_KEY, backgroundVideoSearchTerms, BACKGROUND_MAX_RESULTS),
         translateDataToVideosMap(AUDIO_KEY, audioSearchTerms, AUDIO_MAX_RESULTS),
         translateDataToVideosMap(FLOATERS_KEY, floaterSearchTerms, FLOATERS_MAX_RESULTS),
     ]);

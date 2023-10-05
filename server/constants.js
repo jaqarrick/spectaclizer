@@ -9,7 +9,7 @@ const backgroundVideoSearchTerms = [
   'Marvel Clip Action Scene',
   'Police Training Video',
   'Military Training Documentary',
-  'Marine Trainint Documentary',
+  'Marine Training Documentary',
 ];
 
 const audioSearchTerms = [
@@ -23,9 +23,9 @@ const BACKGROUND_KEY = 'background';
 const AUDIO_KEY = 'audio';
 const FLOATERS_KEY = 'floaters';
 
-const BACKGROUND_MAX_RESULTS = 25;
+const BACKGROUND_MAX_RESULTS = 30;
 const AUDIO_MAX_RESULTS = 15;
-const FLOATERS_MAX_RESULTS = 40;
+const FLOATERS_MAX_RESULTS = 50;
 
 module.exports = {
   floaterSearchTerms,
