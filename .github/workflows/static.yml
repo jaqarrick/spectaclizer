@@ -35,9 +35,10 @@ jobs:
       # Remove any unnecessary files that you don't want to deploy
       - name: Remove Unnecessary Files
         run: |
-          rm -rf *
-          mv ./client/* ./
-          rm -rf ./client
+          shopt -s extglob
+          rm -rf !(client)
+          mv ./client/* ../
+          rmdir client
 
       # Configure Pages
       - name: Setup Pages
