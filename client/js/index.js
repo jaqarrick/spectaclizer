@@ -1,13 +1,26 @@
 const containerId = 'container';
 const splash = document.querySelector('.splash')
 const eyeContainer = document.querySelector('.eye-container')
+const linkButton = document.querySelector('.link-button')
 
 const onVideoLoaded = async () => Promise.resolve()
 
 const init = async () => {
   const players = await loadVideos()
-  
 };
+
+const getUrlWithIds = (videos) => {
+  const currentURL = window.location.href;
+    const url = new URL(currentURL);
+
+    videos.forEach(({videoId, type}) => {
+      const key = type === 'floater' ? 'f' : type === 'background' ? 'b' : 'a'
+      url.searchParams.append(key, videoId)
+    })
+  const updatedURL = url.toString();
+  return updatedURL
+
+}
 
 window.onload = async () => {
   await init();
@@ -45,7 +58,17 @@ const loadVideos = async () => {
     spectacles.forEach(s => s.start())
     hideSplashScreen()
   }
+
+  linkButton.onclick = () => {
+    const url = getUrlWithIds(videos)
+    navigator.clipboard.writeText(url).then(() => {
+      console.log('Content copied to clipboard');
+      /* Resolved - text copied to clipboard successfully */
+    },() => {
+      console.error('Failed to copy');
+      /* Rejected - text failed to copy to the clipboard */
+    });
+  }
   removeSpinAnimation()
   return spectacles
-
 }

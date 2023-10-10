@@ -16,7 +16,34 @@ const makeRequest = async () => {
   }
 };
 
-const fetchInitialData = async () => {
+const getVideoIdsFromParams = ()  => {
+  const params = new URLSearchParams(window.location.search)
+  if(params.size < 5) return null
+  const videos = []
+ 
+  videos.push({
+      type: 'background',
+      videoId: params.get('b')
+  })
+  videos.push({
+    type: 'audio',
+    videoId: params.get('a')
+  })
+  params.getAll('f').forEach(id => {
+    videos.push({
+      type: 'floater',
+      videoId: id
+    })
+  })
+
+  return videos
+}
+const fetchInitialData = async () => {  
+  const videosFromParams = getVideoIdsFromParams()
+  if(videosFromParams){
+    return videosFromParams
+  }
+
   const allVideoData = await makeRequest();
   const videoList = [];
 
@@ -42,3 +69,4 @@ const fetchInitialData = async () => {
   console.log(videoList);
   return videoList;
 };
+

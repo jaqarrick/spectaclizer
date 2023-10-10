@@ -34,6 +34,11 @@
       position: relative;
     }
 
+    .link-button {
+      margin: 10px;
+      cursor: pointer;
+    }
+
     .splash {
       z-index: 999;
       width: 100%;
@@ -68,6 +73,16 @@
       }
     }
 
+    .footer {
+      position: absolute;
+      display: flex;
+      height: 40px;
+      width: 100%;
+      z-index: 998;
+      bottom: 0;
+      justify-content: right;
+    }
+
 
     .background {
       position: absolute;
@@ -93,6 +108,7 @@
       width: 100%;
       height: 100%;
       position: relative;
+      z-index: 998
     }
 
     @keyframes float {
@@ -127,9 +143,15 @@
           <path class="cls-1" d="M44 24s-7 10-20 10S4 24 4 24s7-10 20-10 20 10 20 10z" />
           <path class="cls-1" d="M-360-496h700v700h-700z" />
         </svg></div>
+    </div>
+    <div class="footer">
+      <svg class="w-6 h-6 text-gray-800 dark:text-white link-button" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 19 19">
+        <path stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.013 7.962a3.519 3.519 0 0 0-4.975 0l-3.554 3.554a3.518 3.518 0 0 0 4.975 4.975l.461-.46m-.461-4.515a3.518 3.518 0 0 0 4.975 0l3.553-3.554a3.518 3.518 0 0 0-4.974-4.975L10.3 3.7"/>
+      </svg>
 
     </div>
   </div>
+  
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="js/animations.js"></script>
   <script src="js/api.js"></script>
