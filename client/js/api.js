@@ -1,10 +1,10 @@
 const BACKGROUND_KEY = 'background';
 const AUDIO_KEY = 'audio';
 const FLOATERS_KEY = 'floaters';
-const NUM_OF_FLOATERS = 3;
+const NUM_OF_FLOATERS = 8 ;
 
 const makeRequest = async () => {
-  const url = `https://ext-tech.online/spectacle/videos`;
+  const url = `http://localhost:3000/videos`;
   try {
     const response = await fetch(url);
     const data = await response.json();

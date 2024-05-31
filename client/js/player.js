@@ -1,10 +1,12 @@
 class Spectaclizer {
-  constructor({ videoId, containerId, type }) {
+  constructor({ videoId, containerId, type, animationDelay }) {
     const playerId = `player-${videoId}`;
     this.playerId = playerId;
     this.containerId = containerId;
     this.videoId = videoId;
     this.type = type;
+    // delay in seconds
+    this.animationDelay = animationDelay;
 
     this.render();
     this.initPlayer();
@@ -31,13 +33,16 @@ class Spectaclizer {
       this.playerElement.style.opacity = 0;
       this.playerElement.style.pointerEvents = 'none'
     } else if (this.type === 'floater') {
+
       const wrapper = document.createElement('div');
       wrapper.classList.add('floater-wrapper');
+      wrapper.style.animationDelay = this.animationDelay + 's';
       wrapper.appendChild(this.playerElement);
       containerElement.appendChild(wrapper);
       const initialPosition = getRandomPosition(container, wrapper);
       const xDirection = getRandomDirection();
       const yDirection = getRandomDirection();
+
 
       // Set the initial position and move with the random directions
       wrapper.style.left = initialPosition.x + 'px';
@@ -58,7 +63,7 @@ class Spectaclizer {
     this.player = new YT.Player(this.playerId, {
       videoId: this.videoId,
       playerVars: {
-        autoplay: 1,
+        autoplay: 0,
         controls: 0,
         rel: 0,
         mute: 1,
@@ -109,6 +114,7 @@ class Spectaclizer {
     if (!this.player) {
       throw new Error('Player has not been initialized');
     }
-    this.player.playVideo();
+
+    this.player.playVideo()
   };
 }

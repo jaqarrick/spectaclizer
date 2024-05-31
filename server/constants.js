@@ -3,6 +3,7 @@ const floaterSearchTerms = [
   'CNN News Today',
   'Fox News Today',
   'MSNBC News Today',
+  'The View best clip'
 ];
 
 const backgroundVideoSearchTerms = [
@@ -10,11 +11,12 @@ const backgroundVideoSearchTerms = [
   'Police Training Video',
   'Military Training Documentary',
   'Marine Training Documentary',
+  'Food factory'
 ];
 
 const audioSearchTerms = [
-  'Creepy background noise',
-  'Creepy music',
+  'Ambient Drone music',
+  'gregorian chant montage',
   'Drone music',
   'Drone music atonal',
 ];
@@ -23,9 +25,9 @@ const BACKGROUND_KEY = 'background';
 const AUDIO_KEY = 'audio';
 const FLOATERS_KEY = 'floaters';
 
-const BACKGROUND_MAX_RESULTS = 30;
+const BACKGROUND_MAX_RESULTS = 40;
 const AUDIO_MAX_RESULTS = 15;
-const FLOATERS_MAX_RESULTS = 50;
+const FLOATERS_MAX_RESULTS = 100;
 
 module.exports = {
   floaterSearchTerms,

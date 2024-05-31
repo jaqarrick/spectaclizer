@@ -1,8 +1,7 @@
 const containerId = 'container';
 const splash = document.querySelector('.splash')
 const eyeContainer = document.querySelector('.eye-container')
-const linkButton = document.querySelector('.link-button')
-
+const linkButton = document.querySelector('#get-link-button')
 const onVideoLoaded = async () => Promise.resolve()
 
 const init = async () => {
@@ -42,12 +41,17 @@ const removeSpinAnimation = () => {
 const loadVideos = async () => {
   displaySplashScreen()
   const videos = await fetchInitialData();
+
   const spectaclePromises = videos.map(
     async ({ videoId, type }) => {
+      const delay = Math.random() * 100
+      
+      console.log(delay)
       const s = new Spectaclizer({
         videoId,
         type,
         containerId,
+        animationDelay: delay,
       })
       await s.playerReadyPromise
       return s
