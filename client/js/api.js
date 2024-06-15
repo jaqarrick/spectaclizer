@@ -4,7 +4,7 @@ const FLOATERS_KEY = 'floaters';
 const NUM_OF_FLOATERS = 8 ;
 
 const makeRequest = async () => {
-  const url = `http://localhost:3000/videos`;
+  const url = 'https://ext-tech.online/spectacle/videos';
   try {
     const response = await fetch(url);
     const data = await response.json();
