@@ -2,10 +2,15 @@ const containerId = 'container';
 const splash = document.querySelector('.splash')
 const eyeContainer = document.querySelector('.eye-container')
 const linkButton = document.querySelector('#get-link-button')
+const reloadButton = document.querySelector('#reload-button')
 const onVideoLoaded = async () => Promise.resolve()
 
 const init = async () => {
   const players = await loadVideos()
+  reloadButton.onclick = async () => {
+    const newPlayers = await loadVideos()
+    return newPlayers
+  }
 };
 
 const getUrlWithIds = (videos) => {
@@ -45,9 +50,7 @@ const loadVideos = async () => {
   const spectaclePromises = videos.map(
     async ({ videoId, type }) => {
       const delay = Math.random() * 100
-      
-      console.log(delay)
-      const s = new Spectaclizer({
+            const s = new Spectaclizer({
         videoId,
         type,
         containerId,

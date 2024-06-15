@@ -66,7 +66,6 @@ const fetchInitialData = async () => {
       });
     }
   }
-  console.log(videoList);
   return videoList;
 };
 

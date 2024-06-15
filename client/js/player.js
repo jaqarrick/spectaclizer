@@ -59,6 +59,11 @@ class Spectaclizer {
     }
   };
 
+  toggleMuted = () => {
+
+    
+  }
+
   initPlayer = () => {
     this.player = new YT.Player(this.playerId, {
       videoId: this.videoId,
