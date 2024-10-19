@@ -1,7 +1,7 @@
 const BACKGROUND_KEY = 'background';
 const AUDIO_KEY = 'audio';
 const FLOATERS_KEY = 'floaters';
-const NUM_OF_FLOATERS = 8 ;
+const NUM_OF_FLOATERS = 8;
 
 const makeRequest = async () => {
   const url = 'https://ext-tech.online/spectacle/videos';
@@ -16,32 +16,32 @@ const makeRequest = async () => {
   }
 };
 
-const getVideoIdsFromParams = ()  => {
-  const params = new URLSearchParams(window.location.search)
-  if(params.size < 5) return null
-  const videos = []
- 
+const getVideoIdsFromParams = () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.size < 5) return null;
+  const videos = [];
+
   videos.push({
-      type: 'background',
-      videoId: params.get('b')
-  })
+    type: 'background',
+    videoId: params.get('b'),
+  });
   videos.push({
     type: 'audio',
-    videoId: params.get('a')
-  })
-  params.getAll('f').forEach(id => {
+    videoId: params.get('a'),
+  });
+  params.getAll('f').forEach((id) => {
     videos.push({
       type: 'floater',
-      videoId: id
-    })
-  })
+      videoId: id,
+    });
+  });
 
-  return videos
-}
-const fetchInitialData = async () => {  
-  const videosFromParams = getVideoIdsFromParams()
-  if(videosFromParams){
-    return videosFromParams
+  return videos;
+};
+const fetchInitialData = async () => {
+  const videosFromParams = getVideoIdsFromParams();
+  if (videosFromParams) {
+    return videosFromParams;
   }
 
   const allVideoData = await makeRequest();
@@ -68,4 +68,3 @@ const fetchInitialData = async () => {
   }
   return videoList;
 };
-

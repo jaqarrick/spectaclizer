@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const path = require('path')
+const path = require('path');
 const cors = require('cors');
 const { getCachedDataAsJson } = require('./cache');
 const logger = require('./logger');

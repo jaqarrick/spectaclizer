@@ -3,7 +3,10 @@ const floaterSearchTerms = [
   'CNN News Today',
   'Fox News Today',
   'MSNBC News Today',
-  'The View best clip'
+  'The View best clip',
+  'bill maher monologue',
+  'alex jones rant',
+  'joe biden speech',
 ];
 
 const backgroundVideoSearchTerms = [
@@ -11,7 +14,7 @@ const backgroundVideoSearchTerms = [
   'Police Training Video',
   'Military Training Documentary',
   'Marine Training Documentary',
-  'Food factory'
+  'Food factory',
 ];
 
 const audioSearchTerms = [
@@ -19,6 +22,7 @@ const audioSearchTerms = [
   'gregorian chant montage',
   'Drone music',
   'Drone music atonal',
+  'monk music',
 ];
 
 const BACKGROUND_KEY = 'background';

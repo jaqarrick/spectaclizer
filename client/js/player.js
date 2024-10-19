@@ -11,7 +11,7 @@ class Spectaclizer {
     this.render();
     this.initPlayer();
 
-     this.playerReadyPromise = new Promise((resolve) => {
+    this.playerReadyPromise = new Promise((resolve) => {
       this.onPlayerReadyResolver = resolve;
     });
   }
@@ -31,9 +31,8 @@ class Spectaclizer {
     } else if (this.type === 'audio') {
       this.playerElement.style.position = 'absolute';
       this.playerElement.style.opacity = 0;
-      this.playerElement.style.pointerEvents = 'none'
+      this.playerElement.style.pointerEvents = 'none';
     } else if (this.type === 'floater') {
-
       const wrapper = document.createElement('div');
       wrapper.classList.add('floater-wrapper');
       wrapper.style.animationDelay = this.animationDelay + 's';
@@ -42,7 +41,6 @@ class Spectaclizer {
       const initialPosition = getRandomPosition(container, wrapper);
       const xDirection = getRandomDirection();
       const yDirection = getRandomDirection();
-
 
       // Set the initial position and move with the random directions
       wrapper.style.left = initialPosition.x + 'px';
@@ -56,19 +54,34 @@ class Spectaclizer {
         speed,
       );
       this.playerElement.classList.add('floater');
+
+      // toggle mute on click for floater
+      this.playerElement.style.pointerEvents = 'none';
+      wrapper.addEventListener('click', this.toggleMuted);
     }
   };
 
-  toggleMuted = () => {
-
-    
-  }
+  toggleMuted = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.player.isMuted()) {
+      console.log(this.playerElement);
+      console.log(this.player);
+      this.player.g.style.filter =
+        'hue-rotate(1deg) saturate(300%) contrast(150%) brightness(300%)';
+      this.player.unMute();
+    } else {
+      this.player.g.style.filter =
+        'hue-rotate(1deg) saturate(1%) contrast(150%) brightness(300%)';
+      this.player.mute();
+    }
+  };
 
   initPlayer = () => {
     this.player = new YT.Player(this.playerId, {
       videoId: this.videoId,
       playerVars: {
-        autoplay: 0,
+        autoplay: 1,
         controls: 0,
         rel: 0,
         mute: 1,
@@ -90,8 +103,9 @@ class Spectaclizer {
 
   applyVisualEffects = (element) => {
     if (this.type === 'floater') {
+      // color / saturate is set in toggle mute now
       element.style.filter =
-        'hue-rotate(1deg) saturate(300%) contrast(150%) brightness(300%)';
+        'hue-rotate(1deg) saturate(1%) contrast(150%) brightness(300%)';
     } else {
       element.style.filter =
         'hue-rotate(1deg) saturate(1%) contrast(150%) brightness(300%)';
@@ -100,7 +114,7 @@ class Spectaclizer {
   };
 
   onPlayerReady = (event) => {
-    if (this.type !== 'background') {
+    if (this.type == 'audio') {
       this.player.unMute();
     }
 
@@ -110,9 +124,10 @@ class Spectaclizer {
 
     if (this.type === 'floater') {
       this.player.setPlaybackRate(0.5);
+      this.player.mute();
     }
     this.applyVisualEffects(event.target.g);
-    this.onPlayerReadyResolver()
+    this.onPlayerReadyResolver();
   };
 
   start = () => {
@@ -120,6 +135,6 @@ class Spectaclizer {
       throw new Error('Player has not been initialized');
     }
 
-    this.player.playVideo()
+    this.player.playVideo();
   };
 }

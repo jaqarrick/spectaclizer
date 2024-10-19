@@ -1,174 +1,199 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <style>
-    #player {
-      /* Hide the video title and logo */
-      position: relative;
-      padding-top: 0;
-      overflow: hidden;
-    }
-
-    .ytp-chrome-top {
-      display: none !important;
-      /* Hide the top chrome (including title) */
-    }
-
-    .ytp-watermark {
-      display: none !important;
-      /* Hide the YouTube logo */
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    #container {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .link-button {
-      margin: 10px;
-      cursor: pointer;
-    }
-
-    .splash {
-      z-index: 999;
-      width: 100%;
-      height: 100%;
-      background-color: black;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-
-    .eye-container {
-      width: 100px;
-      cursor: pointer;
-      transition: transform 1s ease-in-out, opacity 1s;
-      /* Adjust transition properties as needed */
-    }
-
-    .eye-container.spin {
-      animation: spin 2s linear infinite;
-      opacity: 0.4;
-      cursor: not-allowed
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #player {
+        /* Hide the video title and logo */
+        position: relative;
+        padding-top: 0;
+        overflow: hidden;
       }
 
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .footer {
-      position: absolute;
-      display: flex;
-      height: 40px;
-      width: 100%;
-      z-index: 998;
-      bottom: 0;
-      justify-content: right;
-    }
-
-    .footer .footer-button {
-      border: unset;
-      background-color: transparent;
-      color: red;
-      font-size: 23px;
-    }
-
-    .background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .floater-wrapper {
-      width: 200px;
-      height: 200px;
-      /* border-radius: 50%; */
-      animation: float 20s ease-in-out infinite alternate;
-      position: absolute;
-      overflow: hidden;
-      mix-blend-mode: difference;
-      opacity: 0.5;
-      z-index: 1;
-    }
-
-    .floater {
-      transform: scale(3.5, 2.5);
-      transform-origin: center center;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      z-index: 1
-    }
-
-    @keyframes float {
-      0% {
-        transform: skew(0deg);
+      .ytp-chrome-top {
+        display: none !important;
+        /* Hide the top chrome (including title) */
       }
 
-      100% {
-        transform: skew(50deg);
+      .ytp-watermark {
+        display: none !important;
+        /* Hide the YouTube logo */
       }
-    }
-  </style>
-</head>
 
-<body>
-  <div id="container">
-    <div class="splash">
-      <div class="eye-container"> <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 48 48">
-          <defs>
-            <style>
-              .cls-1 {
-                fill: none;
-                stroke: #fff;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 2px
-              }
-            </style>
-          </defs>
-          <circle class="cls-1" cx="24" cy="24" r="5" />
-          <path class="cls-1" d="M44 24s-7 10-20 10S4 24 4 24s7-10 20-10 20 10 20 10z" />
-          <path class="cls-1" d="M-360-496h700v700h-700z" />
-        </svg></div>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .link-button {
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      .splash {
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      .eye-container {
+        width: 100px;
+        cursor: pointer;
+        transition:
+          transform 1s ease-in-out,
+          opacity 1s;
+        /* Adjust transition properties as needed */
+      }
+
+      .eye-container.spin {
+        animation: spin 2s linear infinite;
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .footer {
+        position: absolute;
+        /* hide for now */
+        display: none;
+        height: 40px;
+        width: 100%;
+        z-index: 998;
+        bottom: 0;
+        justify-content: right;
+      }
+
+      .footer .footer-button {
+        border: unset;
+        background-color: transparent;
+        color: red;
+        font-size: 23px;
+      }
+
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .floater-wrapper {
+        width: 200px;
+        height: 200px;
+        /* border-radius: 50%; */
+        animation: float 20s ease-in-out infinite alternate;
+        position: absolute;
+        overflow: hidden;
+        mix-blend-mode: difference;
+        opacity: 0.5;
+        z-index: 1;
+        cursor: pointer;
+      }
+
+      .floater {
+        transform: scale(3.5, 2.5);
+        transform-origin: center center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+      }
+
+      @keyframes float {
+        0% {
+          transform: skew(0deg);
+        }
+
+        100% {
+          transform: skew(50deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="splash">
+        <div class="eye-container">
+          <svg
+            id="Layer_1"
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+          >
+            <defs>
+              <style>
+                .cls-1 {
+                  fill: none;
+                  stroke: #fff;
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                  stroke-width: 2px;
+                }
+              </style>
+            </defs>
+            <circle class="cls-1" cx="24" cy="24" r="5" />
+            <path
+              class="cls-1"
+              d="M44 24s-7 10-20 10S4 24 4 24s7-10 20-10 20 10 20 10z"
+            />
+            <path class="cls-1" d="M-360-496h700v700h-700z" />
+          </svg>
+        </div>
+      </div>
+      <div class="footer">
+        <button class="footer-button" id="reload-button">&#8635;</button>
+        <svg
+          id="get-link-button"
+          class="w-6 h-6 text-gray-800 dark:text-white link-button"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 19 19"
+        >
+          <path
+            stroke="red"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11.013 7.962a3.519 3.519 0 0 0-4.975 0l-3.554 3.554a3.518 3.518 0 0 0 4.975 4.975l.461-.46m-.461-4.515a3.518 3.518 0 0 0 4.975 0l3.553-3.554a3.518 3.518 0 0 0-4.974-4.975L10.3 3.7"
+          />
+        </svg>
+      </div>
     </div>
-    <div class="footer">
-      <button class="footer-button" id="reload-button">&#8635;</button>
-      <svg id="get-link-button" class="w-6 h-6 text-gray-800 dark:text-white link-button" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 19 19">
-        <path stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.013 7.962a3.519 3.519 0 0 0-4.975 0l-3.554 3.554a3.518 3.518 0 0 0 4.975 4.975l.461-.46m-.461-4.515a3.518 3.518 0 0 0 4.975 0l3.553-3.554a3.518 3.518 0 0 0-4.974-4.975L10.3 3.7"/>
-      </svg>
 
-    </div>
-  </div>
-  
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/player.js"></script>
-  <script src="js/index.js"></script>
-</body>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>
