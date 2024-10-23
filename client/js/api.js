@@ -1,7 +1,7 @@
 const BACKGROUND_KEY = 'background';
 const AUDIO_KEY = 'audio';
 const FLOATERS_KEY = 'floaters';
-const NUM_OF_FLOATERS = 8;
+const NUM_OF_FLOATERS = 16;
 
 const makeRequest = async () => {
   const url = 'https://ext-tech.online/spectacle/videos';
